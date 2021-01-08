@@ -1,0 +1,41 @@
+server:
+  port: 8005
+
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  type-aliases-package: com.bearpx.springcloud.entity
+  mapper-locations:
+    - classpath:mapper/*.xml
+
+spring:
+  application:
+    name: microservicecloud-dept-provider
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/clouddb03?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: Mysql2020
+    dbcp2:
+      min-idle: 10
+      initial-size: 10
+      max-total: 20
+      max-wait-millis: 100
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka,http://localhost:7002/eureka,http://localhost:7003/eureka
+  instance:
+    instance-id: microservice-dept-provider
+    prefer-ip-address: true
+
+info:
+  app.name: microservicecloud
+  company.name: www.bearpx.com
+  build.artifactId: ${project.artifactId}
+  build.version: ${project.version}
+
+hystrix:
+  metrics:
+    enabled: true
